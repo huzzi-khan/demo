@@ -3,11 +3,15 @@ pipeline {
     environment {
         APP_VERSION = '1.0.0'
     }
+    tools {
+        maven 'Maven'
+    }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
                 echo "App Version: ${APP_VERSION}"
+                bat 'mvn --version'
             }
         }
         stage('Test') {
