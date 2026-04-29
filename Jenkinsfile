@@ -6,6 +6,11 @@ pipeline {
     tools {
         maven 'Maven'
     }
+    parameters {
+        string(name: 'VERSION', defaultValue: '1.0.0', description: 'Version to deploy')
+        choice(name: 'ENVIRONMENT', choices: ['Dev', 'Staging', 'Production'], description: 'Target environment')
+        booleanParam(name: 'executeTests', defaultValue: true, description: 'Run tests?')
+    }
     stages {
         stage('Build') {
             steps {
@@ -16,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             when {
-                expression { 1 == 1 }
+                expression { params.executeTests == true }
             }
             steps {
                 echo 'Testing..'
@@ -25,6 +30,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                echo "Deploying version ${params.VERSION} to ${params.ENVIRONMENT}"
             }
         }
     }
