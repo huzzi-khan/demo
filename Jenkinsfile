@@ -17,4 +17,15 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'This will always run after the pipeline!'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 }
