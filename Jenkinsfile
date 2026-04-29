@@ -7,6 +7,9 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression { 1 == 1 }
+            }
             steps {
                 echo 'Testing..'
             }
